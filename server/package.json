@@ -7,7 +7,9 @@
     "build": "tsc -p . && npm run copy:assets",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "copy:assets": "node ./dist/scripts/copyAssets.js",
+    "start:coreBzl": "node ./dist/services/coreBzl.js",
     "start:admin": "node ./dist/services/serverAdmin.js"
+
   },
   "repository": {
     "type": "git",
