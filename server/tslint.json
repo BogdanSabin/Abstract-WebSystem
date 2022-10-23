@@ -1,0 +1,222 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint-immutable"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**",
+            "src/specs/**"
+        ]
+    },
+    "rules": {
+      "no-this-assignment": true,
+      "no-duplicate-super": true,
+      "no-empty-interface": true,
+      "function-constructor": true,
+      "no-parameter-reassignment": true,
+      "only-arrow-functions": [
+        true,
+        "allow-named-functions",
+        "allow-declarations"
+      ],
+      "promise-function-async": [
+        true,
+        "check-function-declaration",
+        "check-function-expression",
+        "check-arrow-function",
+        "check-method-declaration"
+      ],
+      "prefer-const": true,
+      "no-duplicate-variable": [
+        true,
+        "check-parameters"
+      ],
+      "no-implicit-dependencies": [
+        true,
+        "dev"
+      ],
+      "import-blacklist": [
+        true,
+        "underscore"
+      ],
+      "typedef": [
+        true,
+        "call-signature",
+        "property-declaration"
+      ],
+      "no-object-literal-type-assertion": true,
+      "no-non-null-assertion": true,
+      "array-type": [
+        true,
+        "array"
+      ],
+      "no-dynamic-delete": true,
+      "use-isnan": true,
+      "no-conditional-assignment": true,
+      "forin": true,
+      "cyclomatic-complexity": [
+        true,
+        20
+      ],
+      "no-magic-numbers": [true, -1, 0, 1, 2],
+      "no-any":true,
+      "no-unsafe-any":true,
+      "curly": [true, "ignore-same-line"],
+      "deprecation": true,
+      "no-console": [
+        false,
+        "log",
+        "debug",
+        "info",
+        "time",
+        "timeEnd",
+        "trace"
+      ],
+      "no-eval": true,
+
+      "no-unnecessary-class": [
+        true, 
+        "allow-constructor-only", 
+        "allow-static-only", 
+        "allow-empty-class"
+      ],
+      "member-access": [
+        true, 
+        "no-public"
+      ],
+      "prefer-readonly": true,
+      "prefer-function-over-method": [
+        true, 
+        "allow-public", 
+        "allow-protected"
+      ],
+      "no-unbound-method": [
+        true, 
+        "ignore-static"
+      ],
+      "no-invalid-this": [
+        true,
+        "check-function-in-method"
+      ],
+      "new-parens": true,
+      "no-misused-new": true,
+      "no-construct": true,
+      "prefer-method-signature": true,
+      "no-void-expression": false,
+      "no-return-await": true,
+      "no-floating-promises": true,
+      "no-var-keyword": true,
+      "no-shadowed-variable": [
+        true,
+        {
+          "temporalDeadZone": false
+        }
+      ],
+      "no-import-side-effect": true,
+      "no-default-import": true,
+      "no-default-export": true,
+      "no-angle-bracket-type-assertion": true,
+      "no-unnecessary-type-assertion": true,
+      "no-null-keyword": false,
+      "quotemark": [
+        true,
+        "single",
+        "avoid-template",
+        "avoid-escape"
+      ],
+      "increment-decrement": [
+        true,
+        "allow-post"
+      ],
+      "restrict-plus-operands": true,
+      "strict-boolean-expressions": [
+        true,
+        "allow-undefined-union",
+        "allow-string",
+        "allow-enum",
+        "allow-number",
+        "allow-mix",
+        "allow-rhs"
+      ],
+      "no-string-throw": true,
+      "no-namespace": true,
+      "no-internal-module": true,
+      "variable-name": {
+        "options": ["allow-leading-underscore", "ban-keywords", "check-format", "allow-pascal-case"]
+      },
+
+      "member-ordering": ["field", "method"],
+      "adjacent-overload-signatures": [
+        true,
+        { 
+          "ignore-accessors": true 
+        } 
+      ],
+      "unified-signatures": true,
+      "static-this": true,
+      "unnecessary-constructor": [
+        true,
+        {
+          "check-super-calls": true
+        }
+      ],
+      "invalid-void": [
+        true,
+        {
+          "allow-generics": [
+            "EventEmitter",
+            "Promise",
+            "PromiseLike",
+            "Observable"
+          ]
+        }
+      ],
+      "return-undefined": true, 
+      "no-unnecessary-callback-wrapper": true,
+      "no-async-without-await": true,
+      "ordered-imports": false, 
+      "no-duplicate-imports": false, 
+      "no-require-imports": false,
+      "callable-types": true,
+      "object-literal-key-quotes": [
+        true,
+        "consistent"
+      ],       
+      "triple-equals": [
+        true,
+        "allow-null-check",
+        "allow-undefined-check"
+      ], 
+      "binary-expression-operand-order": true,  
+      "prefer-conditional-expression": [
+        true,
+        "check-else-if"
+      ],
+      "prefer-for-of": true,
+      
+      "readonly-keyword": true,
+      "readonly-array": true,
+      "no-let": false,
+      "no-object-mutation": false,
+      "no-delete": false,
+      "no-method-signature": false,
+      "no-this": false,
+      "no-class": false,
+      "no-mixed-interface": true,
+      "no-expression-statement": false,
+      "no-if-statement": false,
+      "ban-types": {
+        "options": [
+            ["Object", "Avoid using the `Object` type. Did you mean `object`?"],
+            ["Function", "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."],
+            ["Boolean", "Avoid using the `Boolean` type. Did you mean `boolean`?"],
+            ["Number", "Avoid using the `Number` type. Did you mean `number`?"],
+            ["String", "Avoid using the `String` type. Did you mean `string`?"],
+            ["Symbol", "Avoid using the `Symbol` type. Did you mean `symbol`?"]
+        ]
+    }
+  },
+  "jsRules": {},
+  "rulesDirectory": []
+}
