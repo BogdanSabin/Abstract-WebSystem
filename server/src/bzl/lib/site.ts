@@ -15,9 +15,8 @@ export const create = async (data: SiteData, adminId: string, next: NextFunction
     const ObjectId = mongoose.Types.ObjectId;
     const id = new ObjectId();
     const linkDesktop = `${config.services.desktop.protocol}://${config.services.desktop.hostname}/site/${id}`
-    const linkMobile = `${config.services.mobile.protocol}://${config.services.mobile.hostname}/site/${id}`
-
-    const newSite = new Model(_.extend({}, _.omit(data, ['token']), { adminId: adminId, linkDesktop: linkDesktop, linkMobile: linkMobile, _id: id }));
+    
+    const newSite = new Model(_.extend({}, _.omit(data, ['token']), { adminId: adminId, linkDesktop: linkDesktop, _id: id }));
     return newSite.save()
         .then(site => { return next(null, site) })
         .catch(error => { return next(BzlError.InteralError(_.toString(error))) })

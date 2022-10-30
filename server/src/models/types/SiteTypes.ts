@@ -6,7 +6,6 @@ export interface SiteType extends DocType {
     readonly name: string,
     readonly description?: string,
     readonly linkDesktop: string,
-    readonly linkMobile: string,
     readonly adminId: string,
     readonly productsSettings: {
         readonly fields: readonly {

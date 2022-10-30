@@ -10,7 +10,6 @@ export class Site extends ModelLib<SiteTypes.SiteModelType>{
         name: { type: String, required: true },
         description: { type: String, required: false },
         linkDesktop: { type: String, required: true },
-        linkMobile: { type: String, required: true },
         adminId: { type: Schema.Types.ObjectId, ref: 'User', required: false },
         productsSettings: {
             fields: [{
