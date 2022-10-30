@@ -9,11 +9,20 @@ export const config: ConfigurationType = {
                 hostname: 'localhost:8000',
                 protocol: 'http',
                 logType: 'dev'
+            },
+            desktop: {
+                port: 8001,
+                hostname: 'localhost:3001',
+                protocol: 'http',
+                logType: 'dev'
             }
         },
         rpc: {
             coreBzl: {
                 queueName: 'rpc_corebzl_queue'
+            },
+            autorizator: {
+                queueName: 'rpc_autz_queue'
             }
         },
         crypto: {
@@ -30,6 +39,15 @@ export const config: ConfigurationType = {
                 type: 'yahoo',
                 email: 'abstractwebsystem@yahoo.com',
                 password: 'dgtoomjloiezikjn'
+            }
+        },
+        volumes: {
+            images: {
+                path: './../../volumes/images',
+                pathBzl: './../../../volumes/images',
+                // tslint:disable-next-line: no-magic-numbers
+                maxSize: 50 * 1024 * 1024, // 5MB
+                allowedExtensions: ['png', 'jpg', 'jpeg', 'gif']
             }
         }
     },

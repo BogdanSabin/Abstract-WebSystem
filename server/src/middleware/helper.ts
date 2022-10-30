@@ -36,3 +36,13 @@ export const redirect = (res: express.Response, error, data) => {
         else return res.redirect(data.redirect);
     }
 }
+
+export const sendFile = (res: express.Response, path: string) => {
+    return res.sendFile(path, (err) => {
+        if (err) {
+            console.log('ErrorSendingFile:', err);
+            res.status(ERROR_HTTP_STATUS);
+            return res.send({ error: err });
+        }
+    })
+}

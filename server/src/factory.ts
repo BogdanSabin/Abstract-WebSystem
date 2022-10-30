@@ -7,10 +7,12 @@ import { ModelsFactory } from './models/index';
 import { MiddlewareFactory } from './middleware';
 import { RoutersFactory } from './routes';
 import { PasswordCypher } from './bzl/lib/PasswordCypher';
+import { AuthorizatorRpcClient } from './clients/authorizatorClient';
 
 
 export class Factory {
     private readonly passwordCypher: PasswordCypher;
+    private readonly authorizatorRpcClient: AuthorizatorRpcClient;
     private readonly routersFactory: RoutersFactory;
     private readonly middlewareFactory: MiddlewareFactory;
     private readonly models: ModelsFactory;
@@ -29,6 +31,7 @@ export class Factory {
 
         this.mailer = new Mailer(config.auth.email.email, config.auth.email.password, config.auth.email.type);
 
+        this.authorizatorRpcClient = new AuthorizatorRpcClient(config.rpc.autorizator.queueName);
         const coreBzlRpcClient = new CoreBzlRpcClient(config.rpc.coreBzl.queueName);
         this.middlewareFactory = new MiddlewareFactory(coreBzlRpcClient);
         this.routersFactory = new RoutersFactory(this.middlewareFactory);
@@ -41,4 +44,5 @@ export class Factory {
     getModels(): ModelsFactory { return this.models }
     getPasswordCypher(): PasswordCypher { return this.passwordCypher }
     getMailer(): Mailer { return this.mailer }
+    getAutzClient(): AuthorizatorRpcClient { return this.authorizatorRpcClient }
 }

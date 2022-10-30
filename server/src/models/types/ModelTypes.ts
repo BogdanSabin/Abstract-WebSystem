@@ -5,5 +5,9 @@ export interface ModelType extends Document, DocType { readonly _id: string; };
 export interface DocType { };
 
 export const enum ModelNames {
-    User = 'User'
+    User = 'User',
+    Site = 'Site',
+    Product = 'Product',
+    Order = 'Order',
+    Image = 'Image'
 }
