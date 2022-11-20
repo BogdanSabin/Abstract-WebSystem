@@ -1,0 +1,82 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <!-- First Name -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="firstName" class="form-control">
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['firstName']?.errors?.['required']">First Name is
+                required
+            </mat-hint>
+        </mat-form-field>
+
+        <!-- Last Name -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="lastName" class="form-control">
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['lastName']?.errors?.['required']">Last Name is
+                required
+            </mat-hint>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" class="form-control">
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['email']?.errors?.['required']">Email is required
+            </mat-hint>
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['email']?.errors?.['email']">Email not valid
+            </mat-hint>
+        </mat-form-field>
+
+        <!-- Phone -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput placeholder="Mobile" formControlName="phone" class="form-control">
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['phone']?.errors">Invalid format
+            </mat-hint>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="{{(showPassword === false)?'password':'text'}}">
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{showPassword?'visibility_off':'visibility'}}
+            </mat-icon>
+            <mat-hint class="hitColor" *ngIf="registerForm.controls?.['password']?.errors?.['required']">Password is
+                required</mat-hint>
+            <mat-hint class="hitColor" *ngIf="isPasswordTooShort('password')">Password is too short</mat-hint>
+        </mat-form-field>
+
+        <!-- Confirm Password -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput formControlName="confirmPassword"
+                type="{{(showPasswordConfirm === false)?'password':'text'}}">
+            <mat-icon matSuffix (click)="togglePasswordConfirmVisibility()">
+                {{showPasswordConfirm?'visibility_off':'visibility'}}
+            </mat-icon>
+            <mat-hint class="hitColor" *ngIf="registerForm.hasError('passwordsNotMatch')">Passwords do not match
+            </mat-hint>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" [disabled]="!registerForm.valid" type="submit">Register</button>
+        <div class="form-text">
+            <p>Already have an account? <a routerLink="/login">Sign in.</a></p>
+        </div>
+    </div>
+</form>
+
+<ng-template #confirmationDialog>
+    <h1 mat-dialog-title>Email Confirmation</h1>
+    <div mat-dialog-content>
+        <div class="img-container">
+            <img src="../../../assets/emailConfirmation.png">
+            <p>We have sent an email to '{{registerForm.get('email')?.value}}' to confirm the validity of your email.
+                After receiving the email follow the link provided to complete the registration process.</p>
+        </div>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close (click)='goToLoginPage()'>OK</button>
+    </div>
+</ng-template>

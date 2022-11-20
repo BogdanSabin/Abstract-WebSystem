@@ -93,7 +93,7 @@ export const emailConfirmation = (token: string, next: NextFunction) => {
             if (mongores.nModified === 0) return next(BzlError.NodataFound());
 
             const res = {
-                redirect: `${config.services.admin.protocol}://${config.services.admin.hostname}/static/confirm.html`
+                redirect: `${config.services.frontEndAdmin.protocol}://${config.services.frontEndAdmin.hostname}/login`
             };
 
             return next(null, res);

@@ -10,6 +10,12 @@ export const config: ConfigurationType = {
                 protocol: 'http',
                 logType: 'dev'
             },
+            frontEndAdmin: {
+                port: 4200,
+                hostname: 'localhost:4200',
+                protocol: 'http',
+                logType: 'dev'
+            },
             desktop: {
                 port: 8001,
                 hostname: 'localhost:3001',
