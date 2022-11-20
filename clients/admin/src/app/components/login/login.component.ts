@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }
+
   onSubmit() {
     if (this.loginForm.invalid) return;
     else this.login(this.loginForm.value['email'], this.loginForm.value['password'])
@@ -28,13 +29,7 @@ export class LoginComponent implements OnInit {
 
   private login(email: string, password: string) {
     this.authService.login(email, password)
-      .then(data => {
-        const token = data.response.token;
-        const role = data.response.role;
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('role', role);
-        this.router.navigate(['admin']);
-      })
+      .then(() => {this.router.navigate(['admin']);})
   }
 
   isPasswordTooShort() {

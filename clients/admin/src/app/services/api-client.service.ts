@@ -35,18 +35,20 @@ export interface ErrorResponse {
   providedIn: 'root'
 })
 export class ApiClientService {
+  private readonly JWT_TOKEN_KEY = 'access_token';
+  private readonly ENDPOINT = 'http://localhost:8000';
   private axiosClient: AxiosInstance;
 
   constructor() {
     // The ApiClient wraps calls to the underlying Axios client.
     this.axiosClient = axios.create({
-      baseURL: 'http://localhost:8000',
+      baseURL: this.ENDPOINT,
       timeout: 3000,
     });
   }
 
   public async get<T>(options: GetOptions): Promise<T> {
-    const token = localStorage.getItem("access_token") || '';
+    const token = this.getToken();
     return this.axiosClient.request<T>({
       method: "get",
       url: options.url,
@@ -58,7 +60,7 @@ export class ApiClientService {
   }
 
   public async post<T>(options: PostOptions): Promise<T> {
-    const token = localStorage.getItem("access_token") || '';
+    const token = this.getToken();
     return this.axiosClient.request<T>({
       method: "post",
       url: options.url,
@@ -70,7 +72,7 @@ export class ApiClientService {
   }
 
   public async put<T>(options: PutOptions): Promise<T> {
-    const token = localStorage.getItem("access_token") || '';
+    const token = this.getToken();
     return this.axiosClient.request<T>({
       method: "put",
       url: options.url,
@@ -83,7 +85,7 @@ export class ApiClientService {
   }
 
   public async delete<T>(options: DeleteOptions): Promise<T> {
-    const token = localStorage.getItem("access_token") || '';
+    const token = this.getToken();
     return this.axiosClient.request<T>({
       method: "delete",
       url: options.url,
@@ -92,4 +94,9 @@ export class ApiClientService {
       }
     }).then(response => { return response.data; });
   }
+
+  private getToken(): string {
+    return localStorage.getItem(this.JWT_TOKEN_KEY) || '';
+  }
+
 }

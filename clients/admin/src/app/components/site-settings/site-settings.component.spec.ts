@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OverviewComponent } from './overview.component';
+import { SiteSettingsComponent } from './site-settings.component';
 
-describe('OverviewComponent', () => {
-  let component: OverviewComponent;
-  let fixture: ComponentFixture<OverviewComponent>;
+describe('SiteSettingsComponent', () => {
+  let component: SiteSettingsComponent;
+  let fixture: ComponentFixture<SiteSettingsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OverviewComponent ]
+      declarations: [ SiteSettingsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OverviewComponent);
+    fixture = TestBed.createComponent(SiteSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

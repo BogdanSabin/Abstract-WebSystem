@@ -26,10 +26,7 @@ export class ChangePasswordRequestComponent implements OnInit {
     if (this.cahngePasswordReqForm.invalid) return;
     else
       return this.authService.changePasswordRequest(this.cahngePasswordReqForm.value['email'])
-        .then((data) => {
-          localStorage.setItem('access_token', data.response.token);
-          return this.dialog.open(this.changePasswordRequestDialog);
-        })
+        .then(() => { return this.dialog.open(this.changePasswordRequestDialog); })
   }
 
   goToChangePasswordPage() {

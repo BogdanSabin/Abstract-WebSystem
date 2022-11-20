@@ -1,0 +1,75 @@
+<mat-toolbar color="primary">
+    <!-- Menu -->
+    <button mat-icon-button (click)="sideNavToggel=!sideNavToggel">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Abstract Web System</span>
+    <span class="example-spacer"></span>
+
+    <!-- MyProfile -->
+    <button mat-icon-button (click)="goTo('/admin/myprofile')">
+        <mat-icon>person</mat-icon>
+    </button>
+    <span>MyProfile</span>
+
+    <!-- LogOut -->
+    <button mat-icon-button (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+    </button>
+    <span>Log Out</span>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <!-- SideNav -->
+    <mat-sidenav [(opened)]="sideNavToggel" mode="side">
+        <mat-list>
+            <div class="list">
+                <!-- Dashboard -->
+                <div class="listItem">
+                    <button mat-icon-button class="white-icon" (click)="goTo('/admin/dashboard')">
+                        <mat-icon>dashboard</mat-icon>
+                    </button>
+                    <span>Dashboard</span>
+                </div>
+
+                <!-- Sites -->
+                <div class="listItem">
+                    <button mat-icon-button class="white-icon" (click)="goTo('/admin/sites')">
+                        <mat-icon>desktop_mac</mat-icon>
+                    </button>
+                    <span>Sites</span>
+                </div>
+
+                <!-- Sites Settings -->
+                <div class="listItem">
+                    <button mat-icon-button class="white-icon" (click)="goTo('/admin/sitesettings')">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <span>Settings</span>
+                </div>
+                <!-- Orders -->
+                <div class="listItem">
+                    <button mat-icon-button class="white-icon" (click)="goTo('/admin/orders')">
+                        <mat-icon>filter_none</mat-icon>
+                    </button>
+                    <span>Orders</span>
+                </div>
+
+                <!-- Users -->
+                <div class="listItem">
+                    <button mat-icon-button class="white-icon" (click)="goTo('/admin/users')">
+                        <mat-icon>people</mat-icon>
+                    </button>
+                    <span>Users</span>
+                </div>
+            </div>
+        </mat-list>
+    </mat-sidenav>
+
+    <!-- SiseNav Content -->
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

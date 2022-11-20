@@ -1,32 +1,39 @@
-<h1 style="text-align: center;">Login page</h1>
+<div class="main-div">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="container">
+            <h1>Log In</h1>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email" formControlName="email" class="form-control">
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('email')?.value !==null && loginForm.get('email')?.hasError('required')">Email
+                    is required</mat-hint>
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('email')?.value !==null && loginForm.get('email')?.hasError('email')">Email not
+                    valid</mat-hint>
+            </mat-form-field>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="container">
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="email" formControlName="email" class="form-control">
-            <mat-hint class="hitColor" *ngIf="loginForm.controls?.['email']?.errors?.['required']">Email is required</mat-hint>
-            <mat-hint class="hitColor" *ngIf="loginForm.controls?.['email']?.errors?.['email']">Email not valid</mat-hint>
-        </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="{{(showPassword === false)?'password':'text'}}">
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                </mat-icon>
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('password')?.value !==null && loginForm.get('password')?.hasError('required')">
+                    Password is required</mat-hint>
+                <mat-hint class="hitColor" *ngIf="isPasswordTooShort()">Password is too short</mat-hint>
+            </mat-form-field>
+            <div class="forgotPassword-text">
+                <a routerLink="/changepasswordrequest">Forgot password?</a>
+            </div>
 
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="{{(showPassword === false)?'password':'text'}}">
-            <mat-icon matSuffix  (click)="togglePasswordVisibility()">
-                {{showPassword?'visibility_off':'visibility'}}
-            </mat-icon>
-            <mat-hint class="hitColor" *ngIf="loginForm.controls?.['password']?.errors?.['required']">Password is required</mat-hint>
-            <mat-hint class="hitColor" *ngIf="isPasswordTooShort()">Password is too short</mat-hint>
-        </mat-form-field>
-        <div class="forgotPassword-text">
-            <a routerLink="/changepasswordrequest">Forgot password?</a>
+            <button mat-flat-button color="primary" [disabled]="!loginForm.valid" type="submit">Login</button>
+
+            <div class="form-text">
+                <p>Need an account? <a routerLink="/register">Sign up.</a></p>
+            </div>
+
         </div>
-
-        <button mat-flat-button color="primary" [disabled]="!loginForm.valid" type="submit">Login</button>
-
-        <div class="form-text">
-            <p>Need an account? <a routerLink="/register">Sign up.</a></p>
-        </div>
-
-    </div>
-</form>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-sidenav-container{
+  height: 100vh;
+  background-image: url('../../../assets/background.jpg');
+}
+
+mat-sidenav{
+ width: 200px;
+ background-color: #3F51B5;
+}
+
+.white-icon {
+  color: white;
+}
+
+a:link { text-decoration: none; color:inherit; color: #FFFFFF;}
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; color:#000000}
+a:active { text-decoration: none; }
+.important a:link {
+  color:#FFFFFF;
+}
+
+
+.listItem{
+  display: flex;
+  align-items: center;
+}
+
+.list{
+  vertical-align: middle; 
+}
+
+.white-icon {
+  color: white;
+}
+
+span{
+  color: white;
+}

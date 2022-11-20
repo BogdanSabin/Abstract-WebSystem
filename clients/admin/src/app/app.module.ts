@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +19,13 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangePasswordRequestComponent } from './components/change-password-request/change-password-request.component';
+import { AdminOverviewComponent } from './components/admin-overview/admin-overview.component';
+import { MyprofileComponent } from './components/myprofile/myprofile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SitesComponent } from './components/sites/sites.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { SiteSettingsComponent } from './components/site-settings/site-settings.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 @NgModule({
@@ -24,7 +34,14 @@ import { ChangePasswordRequestComponent } from './components/change-password-req
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
-    ChangePasswordRequestComponent
+    ChangePasswordRequestComponent,
+    AdminOverviewComponent,
+    MyprofileComponent,
+    DashboardComponent,
+    SitesComponent,
+    OrdersComponent,
+    SiteSettingsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +56,12 @@ import { ChangePasswordRequestComponent } from './components/change-password-req
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+
+    MatDialogModule,
+    MatSidenavModule,
+    MatListModule
   ],
-  providers: [],
+  providers: [JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
