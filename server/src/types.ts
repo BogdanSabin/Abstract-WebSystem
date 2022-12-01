@@ -139,3 +139,8 @@ export interface ImageQueryData extends with_token {
     readonly resourceScope: string,
     readonly resourceId: string,
 }
+
+export interface AnalyticsData extends with_token {
+    readonly adminId?: string,
+    readonly aggMethod: string
+}

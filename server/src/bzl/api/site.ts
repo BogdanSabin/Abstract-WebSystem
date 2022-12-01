@@ -1,5 +1,5 @@
-import { create, findById, queryAll, remove, update } from './../lib/site';
-import { SiteData, NextFunction, IdData, SiteQueryData, UpdateSiteData } from '../../types';
+import { create, findById, queryAll, remove, update, analytics } from './../lib/site';
+import { SiteData, NextFunction, IdData, SiteQueryData, UpdateSiteData, AnalyticsData } from '../../types';
 import { Factory } from '../../factory';
 
 const api = 'site';
@@ -55,6 +55,17 @@ export const siteAPI = {
         return Factory.getInstance().getAutzClient().authorize({ token: data.token, api: api, method: 'delete' })
             .then(async (userid: string) => {
                 return remove(data, { adminId: userid }, next);
+            })
+            .catch(error => {
+                return next(error)
+            })
+    },
+
+    analytics: async (data: AnalyticsData, next: NextFunction) => {
+        console.log('Data', data);
+        return Factory.getInstance().getAutzClient().authorize({ token: data.token, api: api, method: 'analytics' })
+            .then(async (userid: string) => {
+                return analytics(data, { adminId: userid }, next);
             })
             .catch(error => {
                 return next(error)

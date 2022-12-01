@@ -31,6 +31,10 @@ export class SiteRoutes {
             this.siteMiddleware.findById(req, res, next);
         });
 
+        router.get('/data/analytics', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+            this.siteMiddleware.analytics(req, res, next);
+        });
+
         return router;
     }
 }
