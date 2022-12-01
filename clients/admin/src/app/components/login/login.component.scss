@@ -10,6 +10,22 @@
     width: 40%;
 }
 
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    background-color: #37474F;
+  }
+  
+.white-icon {
+    color: white;
+}
+
+span {
+    color: white;
+}
+
 .main-div {
     height: 100vh;
     display: flex;

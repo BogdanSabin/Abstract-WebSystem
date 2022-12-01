@@ -1,20 +1,20 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
     <!-- Menu -->
     <button mat-icon-button (click)="sideNavToggel=!sideNavToggel">
-        <mat-icon>menu</mat-icon>
+        <mat-icon class="white-icon">menu</mat-icon>
     </button>
     <span>Abstract Web System</span>
     <span class="example-spacer"></span>
 
     <!-- MyProfile -->
     <button mat-icon-button (click)="goTo('/admin/myprofile')">
-        <mat-icon>person</mat-icon>
+        <mat-icon class="white-icon">person</mat-icon>
     </button>
     <span>MyProfile</span>
 
     <!-- LogOut -->
     <button mat-icon-button (click)="logOut()">
-        <mat-icon>logout</mat-icon>
+        <mat-icon class="white-icon">logout</mat-icon>
     </button>
     <span>Log Out</span>
 
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Users -->
-                <div class="listItem">
+                <div *ngIf="isMaster()" class="listItem">
                     <button mat-icon-button class="white-icon" (click)="goTo('/admin/users')">
                         <mat-icon>people</mat-icon>
                     </button>

@@ -79,4 +79,8 @@ export class AuthenticationService {
     localStorage.removeItem(this.ROLE_KEY);
   }
 
+  public isMaster(): boolean {
+    return (localStorage.getItem(this.ROLE_KEY) || '') === 'master'
+  }
+
 }

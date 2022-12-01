@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-overview.component.scss']
 })
 export class AdminOverviewComponent implements OnInit {
-  sideNavToggel: boolean = false;
+  sideNavToggel: boolean = true;
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -21,6 +21,10 @@ export class AdminOverviewComponent implements OnInit {
 
   public goTo(route: string): void {
     this.router.navigate([route]);
+  }
+
+  public isMaster(): boolean {
+    return this.authService.isMaster();
   }
 
 }

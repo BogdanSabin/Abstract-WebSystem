@@ -14,6 +14,7 @@ import { AdminOverviewComponent } from './components/admin-overview/admin-overvi
 import { ChangePasswordRequestComponent } from './components/change-password-request/change-password-request.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminOverviewComponent,

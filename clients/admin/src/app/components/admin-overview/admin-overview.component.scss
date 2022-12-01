@@ -1,19 +1,23 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 mat-sidenav-container{
-  height: 100vh;
-  background-image: url('../../../assets/background.jpg');
+height: 100vh;
+background-image: url('../../../assets/background.jpg');
+}
+
+mat-toolbar {
+background-color: #37474F;
 }
 
 mat-sidenav{
- width: 200px;
- background-color: #3F51B5;
+width: 200px;
+background-color: #455A64;
 }
 
 .white-icon {
-  color: white;
+color: white;
 }
 
 a:link { text-decoration: none; color:inherit; color: #FFFFFF;}
@@ -21,23 +25,23 @@ a:visited { text-decoration: none; }
 a:hover { text-decoration: none; color:#000000}
 a:active { text-decoration: none; }
 .important a:link {
-  color:#FFFFFF;
+color:#FFFFFF;
 }
 
 
 .listItem{
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .list{
-  vertical-align: middle; 
+vertical-align: middle; 
 }
 
 .white-icon {
-  color: white;
+color: white;
 }
 
 span{
-  color: white;
+color: white;
 }

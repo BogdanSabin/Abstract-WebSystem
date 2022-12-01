@@ -55,4 +55,8 @@ export class ChangePasswordComponent implements OnInit {
     this.showPasswordConfirm = !this.showPasswordConfirm;
   }
 
+  public goTo(route: string): void {
+    this.router.navigate([route]);
+  }
+
 }

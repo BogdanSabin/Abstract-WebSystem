@@ -40,4 +40,7 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  public goTo(route: string): void {
+    this.router.navigate([route]);
+  }
 }

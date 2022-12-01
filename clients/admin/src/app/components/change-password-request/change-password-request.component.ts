@@ -32,4 +32,8 @@ export class ChangePasswordRequestComponent implements OnInit {
   goToChangePasswordPage() {
     return this.router.navigate(['changepassword']);
   }
+
+  public goTo(route: string): void {
+    this.router.navigate([route]);
+  }
 }
