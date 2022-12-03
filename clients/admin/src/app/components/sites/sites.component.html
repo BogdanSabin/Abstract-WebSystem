@@ -1,1 +1,349 @@
-<p>sites works!</p>
+<div class="container">
+    <button mat-raised-button style="margin-bottom: 10px; margin-top: 10px;" (click)="addNewSite()">
+        <mat-icon>add</mat-icon>
+        Add new site
+    </button>
+
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{row.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+            <td mat-cell *matCellDef="let row">{{row.description}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="linkDesktop">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Link</th>
+            <td mat-cell *matCellDef="let row">
+                <mat-icon>link</mat-icon> <a href={{row.linkDesktop}} target="_blank">{{row.linkDesktop}}</a>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)='viewSite(row.id)'>
+                        <mat-icon>remove_red_eye</mat-icon>
+                        <span>View</span>
+                    </button>
+                    <button mat-menu-item (click)='editSite(row.id)'>
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)='deleteSiteDialogFun(row.id, row.name)'>
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+    </table>
+
+    <mat-paginator [length]="sites.length" [pageSize]="5" [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+
+</div>
+
+<ng-template #deleteSiteDialog>
+    <h1 mat-dialog-title>Site Delete</h1>
+    <div mat-dialog-content>
+        <div class="img-container">
+            <p>Are you sure that you want to delete "{{siteToDelete.name}}" ?</p>
+        </div>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close (click)='deleteSite()'>Delete</button>
+        <button mat-button mat-dialog-close (click)='cancelDeleteSite()'>Cancel</button>
+    </div>
+</ng-template>
+
+
+<ng-template #addNewSiteDialog>
+    <h1 mat-dialog-title>Create new Site</h1>
+    <div mat-dialog-content>
+
+        <form [formGroup]="siteAddForm">
+            <!-- Name -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" class="form-control">
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description" class="form-control">
+            </mat-form-field>
+
+            <!-- ProductSettings -->
+            <h3>Product Settings:</h3>
+            <ng-container fromArrayName="productsSettings">
+                <ng-container *ngFor="let productForm of getProductSettings().controls; let i = index">
+                    <div [formGroup]="productForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <mat-select placeholder="Type" formControlName="type">
+                                <mat-option value="string">string</mat-option>
+                                <mat-option value="number">number</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <mat-select placeholder="Type" formControlName="isMandatory">
+                                <mat-option value="yes">yes</mat-option>
+                                <mat-option value="no">no</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-icon (click)="deleteProductSetting(i)">delete_forever</mat-icon>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button (click)="addProductSettings()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+
+            <!-- OrderSettings -->
+            <h3>Order Settings:</h3>
+            <ng-container fromArrayName="ordersSettings">
+                <ng-container *ngFor="let orderForm of getOrderSettings().controls; let i = index">
+                    <div [formGroup]="orderForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <mat-select placeholder="Type" formControlName="type">
+                                <mat-option value="string">string</mat-option>
+                                <mat-option value="number">number</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <mat-select placeholder="Mandatory" formControlName="isMandatory">
+                                <mat-option value="yes">yes</mat-option>
+                                <mat-option value="no">no</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-icon (click)="deleteOrderSetting(i)">delete_forever</mat-icon>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button (click)="addOrderSettings()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </form>
+
+
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button mat-dialog-close [disabled]="!siteAddForm.valid" (click)='saveSite()'>Save</button>
+    </div>
+</ng-template>
+
+<ng-template #viewDialog>
+    <h1 mat-dialog-title>View Site</h1>
+    <div mat-dialog-content>
+
+        <form [formGroup]="siteViewForm">
+            <!-- Name -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" class="form-control" [readonly]="true">
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description" class="form-control"
+                    [readonly]="true">
+            </mat-form-field>
+
+            <!-- ProductSettings -->
+            <h3>Product Settings:</h3>
+            <ng-container fromArrayName="productsSettings">
+                <ng-container *ngFor="let productViewForm of getViewProductSettings().controls; let i = index">
+                    <div [formGroup]="productViewForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key" [readonly]="true">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <input matInput placeholder="Key" formControlName="type" [readonly]="true">
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <input matInput placeholder="Key" formControlName="isMandatory" [readonly]="true">
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <!-- OrderSettings -->
+            <h3>Order Settings:</h3>
+            <ng-container fromArrayName="ordersSettings">
+                <ng-container *ngFor="let orderViewForm of getViewOrderSettings().controls; let i = index">
+                    <div [formGroup]="orderViewForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key" [readonly]="true">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <input matInput placeholder="Key" formControlName="type" [readonly]="true">
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <input matInput placeholder="Key" formControlName="isMandatory" [readonly]="true">
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </form>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Ok</button>
+    </div>
+</ng-template>
+
+<ng-template #editDialog>
+    <h1 mat-dialog-title>Create new Site</h1>
+    <div mat-dialog-content>
+
+        <form [formGroup]="editSiteForm">
+            <!-- Name -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" class="form-control">
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description" class="form-control">
+            </mat-form-field>
+
+            <!-- ProductSettings -->
+            <h3>Product Settings:</h3>
+            <ng-container fromArrayName="productsSettings">
+                <ng-container *ngFor="let productEditForm of getEditProductSettings().controls; let i = index">
+                    <div [formGroup]="productEditForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <mat-select placeholder="Type" formControlName="type">
+                                <mat-option value="string">string</mat-option>
+                                <mat-option value="number">number</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <mat-select placeholder="Type" formControlName="isMandatory">
+                                <mat-option value="yes">yes</mat-option>
+                                <mat-option value="no">no</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-icon (click)="deleteEditProductSetting(i)">delete_forever</mat-icon>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button (click)="addEditProductSettings()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+
+            <!-- OrderSettings -->
+            <h3>Order Settings:</h3>
+            <ng-container fromArrayName="ordersSettings">
+                <ng-container *ngFor="let orderEditForm of getEditOrderSettings().controls; let i = index">
+                    <div [formGroup]="orderEditForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key">
+                        </mat-form-field>
+                        <!-- Type -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Type</mat-label>
+                            <mat-select placeholder="Type" formControlName="type">
+                                <mat-option value="string">string</mat-option>
+                                <mat-option value="number">number</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- isMandatory -->
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Mandatory</mat-label>
+                            <mat-select placeholder="Mandatory" formControlName="isMandatory">
+                                <mat-option value="yes">yes</mat-option>
+                                <mat-option value="no">no</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-icon (click)="deleteEditProductSetting(i)">delete_forever</mat-icon>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button (click)="addEditOrderSettings()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </form>
+
+
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button mat-dialog-close [disabled]="!editSiteForm.valid" (click)='saveEditSite()'>Edit</button>
+    </div>
+</ng-template>

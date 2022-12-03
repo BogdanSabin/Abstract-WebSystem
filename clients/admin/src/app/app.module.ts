@@ -12,6 +12,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -59,7 +66,17 @@ import { UsersComponent } from './components/users/users.component';
 
     MatDialogModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+
+    MatMenuModule,
+
+    MatSelectModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatDividerModule
   ],
   providers: [JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
   bootstrap: [AppComponent]
