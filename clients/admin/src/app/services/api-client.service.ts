@@ -43,7 +43,7 @@ export class ApiClientService {
     // The ApiClient wraps calls to the underlying Axios client.
     this.axiosClient = axios.create({
       baseURL: this.ENDPOINT,
-      timeout: 3000,
+      timeout: 60000,
     });
   }
 

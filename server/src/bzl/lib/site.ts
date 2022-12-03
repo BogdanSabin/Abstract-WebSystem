@@ -92,7 +92,6 @@ const mvpProducts = async (filter: SiteFilter, next: NextFunction) => {
         })
         .then(products => {
             const productIds = _.map(products, p => p._id);
-            console.log(productIds);
             return ModelOrder.find({ products: { $in: productIds } }).populate('products', 'fields').exec()
                 .then(orders => {
                     let response = {};
