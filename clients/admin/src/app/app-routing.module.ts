@@ -1,5 +1,4 @@
 import { UsersComponent } from './components/users/users.component';
-import { SiteSettingsComponent } from './components/site-settings/site-settings.component';
 import { SitesComponent } from './components/sites/sites.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -12,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { AdminOverviewComponent } from './components/admin-overview/admin-overview.component';
 import { ChangePasswordRequestComponent } from './components/change-password-request/change-password-request.component';
+import { ProductsComponent } from './components/products/products.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full' },
@@ -46,8 +46,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'sitesettings',
-        component: SiteSettingsComponent,
+        path: 'products',
+        component: ProductsComponent,
         canActivate: [AuthGuard]
       },
       {

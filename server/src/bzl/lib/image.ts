@@ -41,7 +41,8 @@ export const create = async (data: ImageUploadData, adminid: string, next: NextF
                         extension: data.extension
                     })
 
-                    return newImage.save()
+                    return ImageModel.deleteOne({ resourceId: data.imageRefData.resourceId }).exec()
+                        .then(() => { return newImage.save() })
                         .then(image => { return next(null, image) })
                         .catch(error => { removeImageFromDisk(imgName); return next(BzlError.InteralError(_.toString(error))) })
                 }

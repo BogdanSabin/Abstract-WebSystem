@@ -54,7 +54,7 @@ export class SitesComponent implements OnInit {
     return Promise.resolve()
       .then(() => {
         return this.dialog.open(this.addDialog, {
-          height: '100%',
+          height: '90%',
           width: '100%'
         })
       })
@@ -162,7 +162,7 @@ export class SitesComponent implements OnInit {
         return this.initViewFormWithData(site);
       })
       .then(() => {
-        return this.dialog.open(this.viewDialog, { height: '100%', width: '100%' });
+        return this.dialog.open(this.viewDialog, { height: '90%', width: '100%' });
       })
   }
 
@@ -182,7 +182,7 @@ export class SitesComponent implements OnInit {
       })
       .then(() => {
         this.siteEditId = siteId;
-        return this.dialog.open(this.editDialog, { height: '100%', width: '100%' });
+        return this.dialog.open(this.editDialog, { height: '90%', width: '100%' });
       })
   }
 

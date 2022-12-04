@@ -72,8 +72,8 @@
         </div>
     </div>
     <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close (click)='deleteSite()'>Delete</button>
-        <button mat-button mat-dialog-close (click)='cancelDeleteSite()'>Cancel</button>
+        <button mat-raised-button mat-dialog-close (click)='deleteSite()'>Delete</button>
+        <button mat-raised-button mat-dialog-close (click)='cancelDeleteSite()'>Cancel</button>
     </div>
 </ng-template>
 
@@ -172,8 +172,8 @@
 
     </div>
     <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button mat-dialog-close [disabled]="!siteAddForm.valid" (click)='saveSite()'>Save</button>
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button mat-dialog-close [disabled]="!siteAddForm.valid" (click)='saveSite()'>Save</button>
     </div>
 </ng-template>
 
@@ -245,7 +245,7 @@
         </form>
     </div>
     <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Ok</button>
+        <button mat-raised-button mat-dialog-close>Ok</button>
     </div>
 </ng-template>
 
@@ -343,7 +343,7 @@
 
     </div>
     <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button mat-dialog-close [disabled]="!editSiteForm.valid" (click)='saveEditSite()'>Edit</button>
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button mat-dialog-close [disabled]="!editSiteForm.valid" (click)='saveEditSite()'>Edit</button>
     </div>
 </ng-template>

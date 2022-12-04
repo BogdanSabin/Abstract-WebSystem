@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiClientService } from './api-client.service';
 
 export interface ISite {
+  id?: string,
   name: string,
   description?: string,
   linkDesktop?: string,

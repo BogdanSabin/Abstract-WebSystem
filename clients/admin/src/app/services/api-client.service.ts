@@ -7,6 +7,10 @@ export interface Params {
   [key: string]: any;
 }
 
+export interface Headers {
+  [key: string]: string;
+}
+
 interface Options {
   url: string;
 }
@@ -59,14 +63,31 @@ export class ApiClientService {
     }).then(response => { return response.data; })
   }
 
-  public async post<T>(options: PostOptions): Promise<T> {
+  public async getBytes<T>(options: GetOptions, returnHeaders = false): Promise<T> {
+    const token = this.getToken();
+    return this.axiosClient.request<T>({
+      method: "get",
+      url: options.url,
+      params: options.params,
+      headers: {
+        ...token.length > 0 && { Authorization: `Bearer ${token}` }
+      },
+      responseType: 'arraybuffer'
+    }).then(response => {
+      if (returnHeaders) return { headers: response.headers, data: response.data } as unknown as T;
+      else return response.data;
+    })
+  }
+
+  public async post<T>(options: PostOptions, extraHeaders?: Headers): Promise<T> {
     const token = this.getToken();
     return this.axiosClient.request<T>({
       method: "post",
       url: options.url,
       data: options.data,
       headers: {
-        ...token.length > 0 && { Authorization: `Bearer ${token}` }
+        ...token.length > 0 && { Authorization: `Bearer ${token}` },
+        ...extraHeaders && extraHeaders
       }
     }).then(response => { return response.data; })
   }

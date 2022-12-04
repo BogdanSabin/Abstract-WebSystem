@@ -19,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,8 +32,8 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SitesComponent } from './components/sites/sites.component';
 import { OrdersComponent } from './components/orders/orders.component';
-import { SiteSettingsComponent } from './components/site-settings/site-settings.component';
 import { UsersComponent } from './components/users/users.component';
+import { ProductsComponent } from './components/products/products.component';
 
 
 @NgModule({
@@ -47,8 +48,8 @@ import { UsersComponent } from './components/users/users.component';
     DashboardComponent,
     SitesComponent,
     OrdersComponent,
-    SiteSettingsComponent,
-    UsersComponent
+    UsersComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +77,8 @@ import { UsersComponent } from './components/users/users.component';
     MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatGridListModule
   ],
   providers: [JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
   bootstrap: [AppComponent]
