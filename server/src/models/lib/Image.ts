@@ -7,7 +7,7 @@ import * as ImageTypes from '../types/ImageTypes';
 // tslint:disable: no-shadowed-variable
 export class Image extends ModelLib<ImageTypes.ImageModelType>{
     protected static readonly SchemaDef: SchemaDefinition = {
-        resourceScope: { type: String, required: true, enum: ['Product', 'Site'] },
+        resourceScope: { type: String, required: true, enum: ['Product', 'Site', 'User'] },
         resourceId: { type: Schema.Types.ObjectId, refPath: 'resourceScope', required: true, unique: true },
         adminId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
         displayAs: { type: String, required: true },

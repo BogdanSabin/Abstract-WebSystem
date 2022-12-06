@@ -8,7 +8,7 @@ import { Factory } from './../../factory';
 import { NextFunction, ImageUploadData, IdData, ImageQueryData } from '../../types';
 import { genericRmove, genericQueryAll } from './common';
 
-const imageScopes: readonly string[] = ['product', 'site'];
+const imageScopes: readonly string[] = ['product', 'site', 'user'];
 const storage = path.join(__dirname, config.volumes.images.pathBzl);
 
 export const create = async (data: ImageUploadData, adminid: string, next: NextFunction) => {
@@ -94,5 +94,6 @@ const getModelByImageScope = (scope: string): Model<any> => {
     switch (_.toLower(scope)) {
         case 'product': return Factory.getInstance().getModels().getProductModel()
         case 'site': return Factory.getInstance().getModels().getSiteModel()
+        case 'user': return Factory.getInstance().getModels().getUserModel()
     }
 }

@@ -144,3 +144,7 @@ export interface AnalyticsData extends with_token {
     readonly adminId?: string,
     readonly aggMethod: string
 }
+
+export interface UsersInSiteData extends with_token {
+    readonly siteId: string
+}

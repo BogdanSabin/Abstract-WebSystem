@@ -35,6 +35,10 @@ export class SiteRoutes {
             this.siteMiddleware.analytics(req, res, next);
         });
 
+        router.get('/users/bysite/:siteid', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+            this.siteMiddleware.usersInSite(req, res, next);
+        });
+
         return router;
     }
 }

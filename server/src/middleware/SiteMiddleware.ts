@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as _ from 'lodash';
 import { RPCClient } from '../clients';
 import { respond } from './helper';
-import { SiteData, IdData, UpdateSiteData, AnalyticsData } from '../types';
+import { SiteData, IdData, UpdateSiteData, AnalyticsData, UsersInSiteData } from '../types';
 
 export class SiteMiddleware {
     private readonly rpcClient: RPCClient;
@@ -86,6 +86,20 @@ export class SiteMiddleware {
         }
 
         this.rpcClient.sendMessage({ api: 'site', method: 'analytics', data: analyticsData })
+            .then(data => {
+                return respond(res, null, data);
+            }).catch(error => {
+                return respond(res, error, null);
+            })
+    }
+
+    usersInSite(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        const data: UsersInSiteData = {
+            token: req.headers.authorization,
+            siteId: req.params.siteid as string
+        }
+
+        this.rpcClient.sendMessage({ api: 'site', method: 'usersInSite', data: data })
             .then(data => {
                 return respond(res, null, data);
             }).catch(error => {

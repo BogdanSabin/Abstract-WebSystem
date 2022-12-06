@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 import { Model } from 'mongoose';
 import { BzlError } from './BzlError';
 import { Factory } from './../../factory';
-import { SiteData, NextFunction, IdData, SiteQueryData, UpdateSiteData, AnalyticsData } from '../../types';
+import { SiteData, NextFunction, IdData, SiteQueryData, UpdateSiteData, AnalyticsData, UsersInSiteData } from '../../types';
 import { config } from './../../config';
 import { genericFindById, genericRmove, genericUpdate, genericQueryAll } from './common';
 
@@ -52,6 +52,12 @@ export const queryAll = async (data: SiteQueryData, filter: SiteFilter, next: Ne
 export const remove = async (data: IdData, filter: SiteFilter, next: NextFunction) => {
     const Model = Factory.getInstance().getModels().getSiteModel();
     return genericRmove(data, filter, Model, next);
+}
+
+export const usersInSite = async (data: UsersInSiteData, next: NextFunction) => {
+    const ModelUser = Factory.getInstance().getModels().getUserModel();
+    return ModelUser.find({ accountInSite: data.siteId })
+        .then(async users => { return next(null, users); }).catch(() => { return next(null, []) })
 }
 
 export const analytics = async (data: AnalyticsData, filter: SiteFilter, next: NextFunction) => {

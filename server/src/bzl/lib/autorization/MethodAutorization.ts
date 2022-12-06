@@ -6,7 +6,8 @@ export const registry = {
             findById: true,
             queryAll: true,
             delete: true,
-            analytics: true
+            analytics: true,
+            usersInSite: true
         },
         product: {
             create: true,
@@ -35,7 +36,8 @@ export const registry = {
             findById: true,
             queryAll: false,
             delete: false,
-            analytics: false
+            analytics: false,
+            usersInSite: false
         },
         product: {
             create: false,

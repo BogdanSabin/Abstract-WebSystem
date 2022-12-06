@@ -31,7 +31,8 @@ export const loginUser = (data: LoginData, next: NextFunction) => {
                 const response = {
                     _id: user._id,
                     expiresIn: '10h',
-                    role: user.isMaster ? 'master' : user.role
+                    role: user.isMaster ? 'master' : user.role,
+                    userData: user
                 };
                 //create token
                 const payload: TokenPayload = { subject: user._id, role: user.role, isMaster: user.isMaster };
