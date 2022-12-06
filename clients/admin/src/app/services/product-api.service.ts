@@ -8,6 +8,10 @@ export interface IProduct extends IProductCreate {
   id: string
 }
 
+export interface IProductName extends IProduct {
+  name: string
+}
+
 export interface IProductCreate {
   siteId: string,
   fields: {
