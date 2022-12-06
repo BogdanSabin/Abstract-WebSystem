@@ -22,6 +22,19 @@ export interface ISite {
   }
 }
 
+export interface IUserInSite {
+  id: string,
+  firstName: string,
+  lastName: string,
+  phone: string,
+  email: string,
+  emailConfirmation: string
+}
+
+interface IUserInSiteResponse {
+  response: IUserInSite[];
+}
+
 interface ISiteResponse {
   response: ISite[];
 }
@@ -57,7 +70,7 @@ export class SiteApiService {
   getSiteById(siteId: string): Promise<ISite> {
     return this.ApiClient.get<ISiteResponse>({
       url: `/api/admin/site/${siteId}`
-    }).then(response => { return response.response as unknown as ISite})
+    }).then(response => { return response.response as unknown as ISite })
   }
 
   updateSite(siteId: string, siteData: ISite): Promise<ISite> {
@@ -65,6 +78,12 @@ export class SiteApiService {
       url: `/api/admin/site/${siteId}`,
       data: siteData
     }).then(response => { return response })
+  }
+
+  getUsersInSite(siteId: string): Promise<IUserInSite[]> {
+    return this.ApiClient.get<IUserInSiteResponse>({
+      url: `/api/admin/site/users/bysite/${siteId}`
+    }).then(response => { return response.response })
   }
 
 }
