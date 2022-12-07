@@ -65,6 +65,12 @@ export class SitesComponent implements OnInit {
           isMandatory: ['yes', [Validators.required]]
         }) as FormGroup;
 
+        const MandatoryCategoryProductSettings = this.formBuilder.group({
+          key: ['category', [Validators.required]],
+          type: ['string', [Validators.required]],
+          isMandatory: ['yes', [Validators.required]]
+        }) as FormGroup;
+
 
         const MandatoryPriceProductSettings = this.formBuilder.group({
           key: ['price', [Validators.required]],
@@ -81,7 +87,7 @@ export class SitesComponent implements OnInit {
         this.siteAddForm = this.formBuilder.group({
           name: [null, [Validators.required]],
           description: [null, [Validators.required]],
-          productsSettings: this.formBuilder.array([MandatoryNameProductSettings, MandatoryPriceProductSettings]),
+          productsSettings: this.formBuilder.array([MandatoryNameProductSettings, MandatoryPriceProductSettings, MandatoryCategoryProductSettings]),
           ordersSettings: this.formBuilder.array([MandatoryEmailOrderSettings])
         })
       })
