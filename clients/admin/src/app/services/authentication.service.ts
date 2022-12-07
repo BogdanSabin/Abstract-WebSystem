@@ -8,8 +8,18 @@ interface LoginResponse {
   response: {
     expiresIn: string,
     role: string,
-    token: string
+    token: string,
+    userData: UserData
   }
+}
+
+export interface UserData {
+  id: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  role: string,
+  phone: string
 }
 
 interface ChangePasswordReqResponse {
@@ -25,6 +35,7 @@ interface ChangePasswordReqResponse {
 export class AuthenticationService {
   private readonly JWT_TOKEN_KEY = 'access_token';
   private readonly ROLE_KEY = 'role';
+  private readonly USER_DATA_KEY = 'user_data';
 
   constructor(private ApiClient: ApiClientService, private jwtHelper: JwtHelperService) { }
 
@@ -38,8 +49,10 @@ export class AuthenticationService {
     }).then(data => {
       const token = data.response.token;
       const role = data.response.role;
+      const userData = JSON.stringify(data.response.userData);
       localStorage.setItem(this.JWT_TOKEN_KEY, token);
       localStorage.setItem(this.ROLE_KEY, role);
+      localStorage.setItem(this.USER_DATA_KEY, userData);
       return true;
     })
   }
@@ -81,6 +94,10 @@ export class AuthenticationService {
 
   public isMaster(): boolean {
     return (localStorage.getItem(this.ROLE_KEY) || '') === 'master'
+  }
+
+  public getUserData(): UserData {
+    return JSON.parse(localStorage.getItem(this.USER_DATA_KEY) || '{}') as UserData;
   }
 
 }
