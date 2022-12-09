@@ -22,6 +22,7 @@ export interface UserData {
 }
 
 export interface RegisterData {
+  accountInSite: string,
   firstName: string,
   lastName: string,
   email: string,
@@ -46,10 +47,11 @@ export class AuthenticationService {
 
   constructor(private ApiClient: ApiClientService, private jwtHelper: JwtHelperService) { }
 
-  login(email: string, password: string): Promise<boolean> {
+  login(email: string, password: string, siteId: string): Promise<boolean> {
     return this.ApiClient.post<LoginResponse>({
       url: '/api/desktop/auth/login',
       data: {
+        site: siteId,
         email: email,
         password: password
       }

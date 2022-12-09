@@ -1,1 +1,65 @@
-<p>login works!</p>
+<mat-toolbar>
+    <!-- Menu -->
+    <span>Welcome to {{siteRef.name}}!</span>
+    <span class="example-spacer"></span>
+
+    <!-- LogIn -->
+    <button mat-icon-button (click)="goTo('login')">
+        <mat-icon class="white-icon">login</mat-icon>
+    </button>
+    <span>Log in</span>
+
+    <!-- Register -->
+    <button mat-icon-button (click)="goTo('register')">
+        <mat-icon class="white-icon">assignment</mat-icon>
+    </button>
+    <span>Sign up</span>
+
+</mat-toolbar>
+
+<div class="main-div">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="container">
+            <h1>Log in</h1>
+
+            <!-- Email -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email" formControlName="email" class="form-control">
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('email')?.value !==null && loginForm.get('email')?.hasError('required')">Email
+                    is required</mat-hint>
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('email')?.value !==null && loginForm.get('email')?.hasError('email')">Email not
+                    valid</mat-hint>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="{{(showPassword === false)?'password':'text'}}">
+                <button type="button" mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint class="hitColor"
+                    *ngIf="loginForm.get('password')?.value !==null && loginForm.get('password')?.hasError('required')">
+                    Password is required</mat-hint>
+                <mat-hint class="hitColor" *ngIf="isPasswordTooShort()">Password is too short</mat-hint>
+            </mat-form-field>
+
+            <!-- Forgot Password -->
+            <div class="forgotPassword-text">
+                <a routerLink="/site/{{siteRef.id}}/changepasswordrequest">Forgot password?</a>
+            </div>
+
+            <!-- LogIn -->
+            <button mat-flat-button color="primary" [disabled]="!loginForm.valid" type="submit">Login</button>
+
+            <!-- Sign up -->
+            <div class="form-text">
+                <p>Need an account? <a routerLink="/site/{{siteRef.id}}/register">Sign up.</a></p>
+            </div>
+
+        </div>
+    </form>
+</div>

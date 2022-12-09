@@ -30,13 +30,13 @@ export const siteAPI = {
 
     findById: async (data: IdData, next: NextFunction) => {
         console.log('Data', data);
-        return Factory.getInstance().getAutzClient().authorize({ token: data.token, api: api, method: 'findById' })
-            .then(async (userid: string) => {
-                return findById(data, { adminId: userid }, next);
-            })
-            .catch(error => {
-                return next(error)
-            })
+        // return Factory.getInstance().getAutzClient().authorize({ token: data.token, api: api, method: 'findById' })
+        //     .then(async (userid: string) => {
+        return findById(data, { adminId: '' }, next);
+            // })
+            // .catch(error => {
+            //     return next(error)
+            // })
     },
 
     queryAll: async (data: SiteQueryData, next: NextFunction) => {
