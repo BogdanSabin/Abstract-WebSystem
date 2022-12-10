@@ -1,0 +1,45 @@
+<app-store-header [displayCart]="false" [siteId]="siteId" [siteName]="siteRef.name"></app-store-header>
+
+<div class="main-div" *ngIf="checkOutForm && cart.items.length">
+    <form [formGroup]="checkOutForm" (ngSubmit)="onSubmit()">
+        <div class="container">
+            <!-- Selected Products -->
+            <b><h2>Selected products:</h2></b>
+            <div class="p-3 divide-y divide-solide">
+                <!-- Product List -->
+                <div class="py-3" *ngIf="cart.items.length">
+                    <div class="flex justify-between font-light mb-2" *ngFor="let item of cart.items">
+                        {{item.name}} x {{item.quantity}}
+                        <span class="font-bold">{{item.price | currency}}</span>
+                    </div>
+                </div>
+                <!-- Total -->
+                <div class="flex justify-between font-light py-3">
+                    Total:
+                    <span class="font-bold">{{getTotal(cart.items) | currency}}</span>
+                </div>
+            </div>
+
+            <!-- OrderFields -->
+            <b><h2>Order Fields:</h2></b>
+            <ng-container fromArrayName="orderFields">
+                <ng-container *ngFor="let orderFieldForm of getOrderFields().controls; let i = index">
+                    <div [formGroup]="orderFieldForm">
+                        <!-- Key -->
+                        <mat-form-field appearance="fill" class="ml-6">
+                            <mat-label>Key</mat-label>
+                            <input matInput placeholder="Key" formControlName="key" [readonly]="true">
+                        </mat-form-field>
+                        <!-- Value -->
+                        <mat-form-field appearance="fill" class="ml-5">
+                            <mat-label>Value</mat-label>
+                            <input matInput placeholder="Value" formControlName="value">
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button mat-flat-button color="primary" [disabled]="!checkOutForm.valid" type="submit">Place Order</button>
+        </div>
+    </form>
+</div>

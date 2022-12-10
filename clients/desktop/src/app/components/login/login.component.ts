@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   private login(email: string, password: string, siteId: string) {
     this.authService.login(email, password, siteId)
-      .then(() => {this.router.navigate(['admin']);})
+      .then(() => {this.router.navigate([`site/${this.siteRef.id}/store`]);})
   }
 
   isPasswordTooShort() {

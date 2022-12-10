@@ -30,7 +30,7 @@ export interface IOrderTable {
 }
 
 export interface IOrderCreate {
-  id: string,
+  siteId: string,
   products: string[],
   orderInfo: {
     key: string,

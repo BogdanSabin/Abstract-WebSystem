@@ -19,7 +19,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +31,14 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangePasswordRequestComponent } from './components/change-password-request/change-password-request.component';
+import { StoreComponent } from './components/store/store.component';
+import { ProductsHeaderComponent } from './components/store/products-header/products-header.component';
+import { StoreHeaderComponent } from './components/store/store-header/store-header.component';
+import { FiltersComponent } from './components/store/filters/filters.component';
+import { ProductBoxComponent } from './components/store/product-box/product-box.component';
+import { CartComponent } from './components/store/cart/cart.component';
+import { CartService } from './services/cart.service';
+import { CheckoutComponent } from './components/store/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +46,14 @@ import { ChangePasswordRequestComponent } from './components/change-password-req
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
-    ChangePasswordRequestComponent
+    ChangePasswordRequestComponent,
+    StoreComponent,
+    ProductsHeaderComponent,
+    StoreHeaderComponent,
+    FiltersComponent,
+    ProductBoxComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +84,12 @@ import { ChangePasswordRequestComponent } from './components/change-password-req
     MatInputModule,
     MatDividerModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatBadgeModule,
+    MatSnackBarModule
   ],
-  providers: [JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
+  providers: [CartService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

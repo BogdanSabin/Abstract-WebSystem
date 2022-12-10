@@ -6,6 +6,12 @@ export interface ISite {
   name: string,
   description?: string,
   linkDesktop?: string,
+  ordersSettings: {
+    fields: {
+      key: string,
+      value: String
+    }[]
+  }
 }
 
 interface ISiteResponse {

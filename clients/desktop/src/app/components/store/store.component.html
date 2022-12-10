@@ -1,0 +1,21 @@
+<app-store-header [cart]="cart" [siteId]="siteId" [siteName]="siteRef.name"></app-store-header>
+
+<mat-drawer-container [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x mt-6">
+    <mat-drawer mode="side" opened class="p-6">
+        <app-filters [categories]="productCategories" (showCategoryEvent)="onShowCategory($event)"></app-filters>
+    </mat-drawer>
+    <mat-drawer-content class="p-6">
+        <app-products-header (columnsCountChange)="onColumnsCountChange($event)"
+            (itemsCountChange)="onItemsCountChange($event)" (itemsSortChange)="onItemsSortChange($event)">
+        </app-products-header>
+        <mat-grid-list gutterSize="16" [cols]="colsView" [rowHeight]="rowHeight">
+
+            <mat-grid-tile *ngFor="let product of products">
+                <app-product-box [product]="product" (addToCart)="onAddToCart($event)" class="w-full"
+                    [fullWidthMode]="colsView === 1">
+                </app-product-box>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-drawer-content>
+</mat-drawer-container>
